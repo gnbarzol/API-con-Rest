@@ -63,6 +63,20 @@ function moviesApi(app) {
         }
     });
     
+    router.patch('/:movieId', async function(req, res, next) {
+        const { body: movie } = req;
+        const { movieId } = req.params;
+        try{
+            const replacedMovieId = await moviesServices.replaceMovie({ movieId, movie });
+            res.status(200).json({
+                data: replacedMovieId,
+                message: 'movie replaced'
+            })
+        }catch{
+            next(err);
+        }
+    });
+
     router.delete('/:moviedId', async function(req, res, next) {
         const { movieId } = req.params;
         try{
