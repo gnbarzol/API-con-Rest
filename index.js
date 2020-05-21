@@ -4,6 +4,9 @@ const app = express();
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 
+// body parse
+app.use(express.json());
+
 moviesApi(app);
 
 app.listen(config.port, () => {

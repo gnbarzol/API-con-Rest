@@ -18,7 +18,7 @@ function moviesApi(app) {
                 data: movies,
                 message: 'movies listed'
             })
-        }catch{
+        }catch(err) {
             next(err);
         }
     });
@@ -31,7 +31,7 @@ function moviesApi(app) {
                 data: movie,
                 message: 'movie retrieved'
             })
-        }catch{
+        }catch(err) {
             next(err);
         }
     });
@@ -44,7 +44,7 @@ function moviesApi(app) {
                 data: createMovieId,
                 message: 'movies created'
             })
-        }catch{
+        }catch(err) {
             next(err);
         }
     });
@@ -58,24 +58,24 @@ function moviesApi(app) {
                 data: updatedMovieId,
                 message: 'movie updated'
             })
-        }catch{
+        }catch(err) {
             next(err);
         }
     });
     
-    router.patch('/:movieId', async function(req, res, next) {
-        const { body: movie } = req;
-        const { movieId } = req.params;
-        try{
-            const replacedMovieId = await moviesServices.replaceMovie({ movieId, movie });
-            res.status(200).json({
-                data: replacedMovieId,
-                message: 'movie replaced'
-            })
-        }catch{
-            next(err);
-        }
-    });
+    // router.patch('/:movieId', async function(req, res, next) {
+    //     const { body: movie } = req;
+    //     const { movieId } = req.params;
+    //     try{
+    //         const replacedMovieId = await moviesServices.replaceMovie({ movieId, movie });
+    //         res.status(200).json({
+    //             data: replacedMovieId,
+    //             message: 'movie replaced'
+    //         })
+    //     }catch{
+    //         next(err);
+    //     }
+    // });
 
     router.delete('/:moviedId', async function(req, res, next) {
         const { movieId } = req.params;
@@ -85,7 +85,7 @@ function moviesApi(app) {
                 data: deletedMovieId,
                 message: 'movie deleted'
             })
-        }catch{
+        }catch(err) {
             next(err);
         }
     });
