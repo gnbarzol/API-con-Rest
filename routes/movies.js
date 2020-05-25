@@ -14,6 +14,9 @@ function moviesApi(app) {
         const { tags } = req.query;
         try{
             const movies = await moviesServices.getMovies({ tags });
+            //Lanzo un error para probar el middleware de errorHandler
+            //throw new Error('Error getting movies');
+
             res.status(200).json({
                 data: movies,
                 message: 'movies listed'
@@ -78,9 +81,9 @@ function moviesApi(app) {
     // });
 
     router.delete('/:moviedId', async function(req, res, next) {
-        const { movieId } = req.params;
+        const { moviedId } = req.params;
         try{
-            const deletedMovieId = await moviesServices.deleteMovie({ movieId });
+            const deletedMovieId = await moviesServices.deleteMovie({ moviedId });
             res.status(200).json({
                 data: deletedMovieId,
                 message: 'movie deleted'
