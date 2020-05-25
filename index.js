@@ -4,7 +4,7 @@ const app = express();
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 
-const { logErrors, errorHandler} = require('./utils/middleware/errorHandler');
+const { logErrors, wrapErrors, errorHandler} = require('./utils/middleware/errorHandler');
 
 // body parse
 app.use(express.json());
@@ -13,6 +13,7 @@ moviesApi(app);
 
 //Middleware de errores
 app.use(logErrors);
+app.use(wrapErrors);
 app.use(errorHandler);
 
 app.listen(config.port, () => {
