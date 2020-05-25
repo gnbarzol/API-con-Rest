@@ -1,7 +1,7 @@
 const joi = require('@hapi/joi');
 
 //Para comprobar que el id es un string y cumple la expresion regular:
-const movieIdSchema = joi.string().regex(/^[0/9a-fA-F]{24}$/);
+const movieIdSchema = joi.string().pattern(/^[a-zA-Z0-9]{24}$/);
 const movieTitleSchema = joi.string().max(80);
 const movieYearSchema = joi
   .number()
