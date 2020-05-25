@@ -14,11 +14,10 @@ function logErrors(err, req, res, next) {
 }
 
 //Por si nos llega un error que no sea tipo boom, hacemos que la estrcutura sea de tipo boom
-function wrapError(err, req, res, next) {
-    if(!err.isBoom) {
-        next(boom.badImplementation(err));
-    }
-    next(err);
+function wrapErrors(err, req, res, next) {
+    !err.isBoom 
+    ? next(boom.badImplementation(err))
+    : next(err);
 }
 
 function errorHandler(err, req, res, next) { //eslint-disable-line
@@ -30,8 +29,8 @@ function errorHandler(err, req, res, next) { //eslint-disable-line
 
 module.exports = {
     logErrors,
-    errorHandler,
-    wrapError
+    wrapErrors,
+    errorHandler
 };
 
 //luego vamos al index y agregamos estos middleware de error siempre al ultimo de nuestras 

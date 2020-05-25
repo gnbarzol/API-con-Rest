@@ -4,12 +4,21 @@ const app = express();
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 
-const { logErrors, wrapErrors, errorHandler} = require('./utils/middleware/errorHandler');
+const { 
+    logErrors, 
+    wrapErrors, 
+    errorHandler
+} = require('./utils/middleware/errorHandler');
+const notFoundHandler = require('./utils/middleware/notFoundHandler');
 
 // body parse
 app.use(express.json());
 
+//Routes
 moviesApi(app);
+
+//NotFound, catch 404
+app.use(notFoundHandler);
 
 //Middleware de errores
 app.use(logErrors);
