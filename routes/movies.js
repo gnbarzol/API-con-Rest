@@ -9,6 +9,13 @@ const {
 
 const validationHandler = require('../utils/middleware/validationHandler');
 
+//Llamo al cacheResponse y el tiempo
+const cacheResponse = require('../utils/cacheResponse');
+const {
+    FIVE_MINUTES_IN_SECONDS, 
+    SIXTY_MINUTES_IN_SECONDS
+} = require('../utils/time');
+
 //Para mantener el control sobre que aplicacion va a consumir nuestra ruta
 //La única responsabilidad de las rutas es saber como recibe parametros y como se los envia a los servicios para que estos los resuelvan y nos envien los datos que necesitamos
 function moviesApi(app) {
@@ -19,6 +26,7 @@ function moviesApi(app) {
 
     //Aqui la ruta home('/') es /api/movies
     router.get('/', async function(req, res, next) {
+        cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
         const { tags } = req.query;
         try{
             const movies = await moviesServices.getMovies({ tags });
@@ -35,6 +43,7 @@ function moviesApi(app) {
     });
 
     router.get('/:movieId', validationHandler({ movieId: movieIdSchema}, 'params'), async function(req, res, next) {
+        cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
         const { movieId } = req.params;
         try{
             const movie = await moviesServices.getMovie({ movieId });
