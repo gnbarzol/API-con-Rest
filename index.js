@@ -3,6 +3,7 @@ const app = express();
 
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
+const userMoviesApi = require('./routes/userMovies');
 
 const { 
     logErrors, 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 //Routes
 moviesApi(app);
+userMoviesApi(app);
 
 //NotFound, catch 404
 app.use(notFoundHandler);
