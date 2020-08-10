@@ -1,5 +1,5 @@
 const MongoLib = require('../lib/mongo');
-const bcrypt = require('bycrypt');
+const bcrypt = require('bcrypt');
 
 class UsersService {
     constructor() {

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const authApi = require('./routes/auth');
+
 const { config } = require('./config/index');
 const moviesApi = require('./routes/movies');
 const userMoviesApi = require('./routes/userMovies');
@@ -18,6 +20,7 @@ app.use(express.json());
 //Routes
 moviesApi(app);
 userMoviesApi(app);
+authApi(app);
 
 //NotFound, catch 404
 app.use(notFoundHandler);
