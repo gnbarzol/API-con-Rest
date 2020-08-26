@@ -80,7 +80,7 @@ function authApi(app) {
           message: 'user created',
         });
       }else{
-        res.status(400).json({
+        res.status(202).json({
             message: 'user already exists',
           });
       }
