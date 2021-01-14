@@ -42,6 +42,6 @@
     "*.js": "eslint --cache --fix"
   },
   "engines": {
-    "node": "14.11.0"
+    "node": "12.x"
   }
 }
